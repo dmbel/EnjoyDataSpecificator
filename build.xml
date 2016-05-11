@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EnjoyDB2Json" default="Main" basedir=".">
+	<property name="HelloText" value="Hello" />
+	<target name="Main">
+		<jar destfile="lib/dataspecifitator.jar" basedir="bin" includes="**">
+		</jar>
+		<copy file="lib/dataspecifitator.jar" tofile="../EnjoyDB2json/lib/dataspecifitator.jar"></copy>
+		
+	</target>
+</project>
