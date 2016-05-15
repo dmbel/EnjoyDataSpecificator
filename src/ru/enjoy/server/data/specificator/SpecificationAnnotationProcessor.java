@@ -81,15 +81,17 @@ public class SpecificationAnnotationProcessor extends AbstractProcessor {
 				printMessage(el, DATAOBJ_ANN_CLASSNAME, ATTR_FIELDS_ORDER, "Field '%s' does not exist", fldName);
 				continue;
 			}
-			if(!fldEl.getModifiers().contains(Modifier.PUBLIC)){
+			if (!fldEl.getModifiers().contains(Modifier.PUBLIC)) {
 				printMessage(el, DATAOBJ_ANN_CLASSNAME, ATTR_FIELDS_ORDER, "Field '%s' does not public.", fldName);
 			}
-			if(fldEl.getModifiers().contains(Modifier.STATIC)){
+			if (fldEl.getModifiers().contains(Modifier.STATIC)) {
 				printMessage(el, DATAOBJ_ANN_CLASSNAME, ATTR_FIELDS_ORDER, "Field '%s' is static.", fldName);
 			}
 			String type = fldEl.asType().toString();
-			if (!ALLOWED_FIELD_TYPES.contains(type)){
-				printMessage(el, DATAOBJ_ANN_CLASSNAME, ATTR_FIELDS_ORDER, "Field '%s' has type '%s', but type must be in list: %s.", fldName, type, ALLOWED_FIELD_TYPES.toString());
+			if (!ALLOWED_FIELD_TYPES.contains(type)) {
+				printMessage(el, DATAOBJ_ANN_CLASSNAME, ATTR_FIELDS_ORDER,
+						"Field '%s' has type '%s', but type must be in list: %s.", fldName, type,
+						ALLOWED_FIELD_TYPES.toString());
 			}
 		}
 	}
@@ -141,8 +143,10 @@ public class SpecificationAnnotationProcessor extends AbstractProcessor {
 
 		String childClassName = childList.childClass();
 		String idFieldName = childList.idField();
-		VariableElement idFldEl = null;
 		String refFieldName = childList.refField();
+		if ((childClassName == null) || (idFieldName == null) || (refFieldName == null))
+			return;
+		VariableElement idFldEl = null;
 		TypeElement childClassElem = null;
 		String idFieldTypeName = null;
 
