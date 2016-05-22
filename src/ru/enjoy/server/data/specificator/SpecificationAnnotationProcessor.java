@@ -27,7 +27,7 @@ public class SpecificationAnnotationProcessor extends AbstractProcessor {
 			Arrays.asList("int", "long", "java.lang.String"));
 	private static final Set<String> ALLOWED_FIELD_TYPES = new LinkedHashSet<>(
 			Arrays.asList("int", "long", "double", "java.lang.String"));
-	private static final String CHILDLIST_ANN_CLASSNAME = ChildList.class.getName();
+	private static final String CHILDLIST_ANN_CLASSNAME = Child.class.getName();
 	private static final String DATAOBJ_ANN_CLASSNAME = DataObject.class.getName();
 	private static final String TABLELIST_ANN_CLASSNAME = TableList.class.getName();
 
@@ -55,7 +55,7 @@ public class SpecificationAnnotationProcessor extends AbstractProcessor {
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 		// Проверка аннотаций ChildList
-		for (Element el : roundEnv.getElementsAnnotatedWith(ChildList.class))
+		for (Element el : roundEnv.getElementsAnnotatedWith(Child.class))
 			workChildList(el);
 		for (Element el : roundEnv.getElementsAnnotatedWith(DataObject.class))
 			workDataObject(el);
@@ -90,7 +90,7 @@ public class SpecificationAnnotationProcessor extends AbstractProcessor {
 	}
 
 	private void workChildList(Element el) {
-		ChildList childList = el.getAnnotation(ChildList.class);
+		Child childList = el.getAnnotation(Child.class);
 
 		String childClassName = childList.childClass();
 		String[] idFieldNames = childList.idField();
